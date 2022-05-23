@@ -43,4 +43,3 @@ if game_status == 'WON':
   print('Player wins')
 else:
   print('Player loses')
-  
