@@ -22,7 +22,7 @@ class Hero:
     }, 'left'
 
   def goal(self, state):
-    person_side, boat = state
+    person_side, _ = state
     # is everybody on the right?
     return set(person_side[person] for person in person_side) == { 'right'}
     # person_side.values() should also work
@@ -33,28 +33,28 @@ class Hero:
     # collect all people on the side of the boat
     person_with_boat = [person for person in person_side if person_side[person] == boat]
 
-    for traveller_group in select_traveller(person_with_boat):
+    for traveler_group in select_traveler(person_with_boat):
       new_side = person_side.copy() # never change the original
 
-      for traveller in traveller_group:
-        # the traveller moves to the other side
-        new_side[traveller] = other_side[person_side[traveller]]
+      for traveler in traveler_group:
+        # the traveler moves to the other side
+        new_side[traveler] = other_side[person_side[traveler]]
 
       new_side = new_side, other_side[boat]
 
       if safe(new_side):
         yield new_side
 
-def select_traveller(candidates):
-  # select 1 or 2 traveller
+def select_traveler(candidates):
+  # select 1 or 2 traveler
   # since there are only two cases,
-  # choose pedestrain approach rather than recursion
+  # choose pedestrian approach rather than recursion
 
-  #one traveller
+  #one traveler
   for first in range(len(candidates)):
     yield [candidates[first]]
 
-  # two travellers
+  # two travelers
   for first in range(len(candidates)):
     for second in range(first+1, len(candidates)):
       yield [candidates[first], candidates[second]]
@@ -87,4 +87,6 @@ def safe(state):
 
   return True
 
-print(Hero.start());
+state = Hero.start(Self)
+for succ in Hero.successor(Self, state):
+  print(succ);
