@@ -28,7 +28,7 @@ def successors(stable):
     yield new_stable # remember where we were
 pass
 
-goal_stable = ['S','S','S','S','E','C','C','C','C'];
+goal_stable = ['S','S','E','C','C'];
 def solution(stable):
   if stable == goal_stable:
     return [stable];
@@ -37,10 +37,11 @@ def solution(stable):
   for new_stable in successors(stable):
     print('New Stable', new_stable)
     sol = solution(new_stable)
+    print('Sol:', sol)
     if sol:
       return [stable] + sol
 
-list(solution(['C','C','C','C','E','S','S','S','S']))
+list(solution(['C','C','E','S','S']))
 
 """Output"""
 # Empty: 4
