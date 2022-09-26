@@ -33,6 +33,3 @@ class Card:
 
   def __format__(self, format) -> str:
     return f'{str(self):{format}}'
-
-
-  
